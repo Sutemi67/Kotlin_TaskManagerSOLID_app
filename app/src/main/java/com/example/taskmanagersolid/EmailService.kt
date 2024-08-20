@@ -1,7 +1,8 @@
 package com.example.taskmanagersolid
 
-class EmailService {
-    fun sendEmail(message: String) {
+class EmailService : NotificationService {
+
+    override fun sendNotification(message: String) {
         println("Sending email with message: $message")
     }
 }

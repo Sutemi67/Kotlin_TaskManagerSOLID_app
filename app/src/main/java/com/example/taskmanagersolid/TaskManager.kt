@@ -1,8 +1,7 @@
 package com.example.taskmanagersolid
 
-class TaskManager {
+class TaskManager(private val notificationService: NotificationService) {
     private val tasks = mutableListOf<Task>()
-    private val emailService = EmailService()
 
     fun addTask(task: Task) {
         tasks.add(task)
@@ -12,7 +11,7 @@ class TaskManager {
         val task = tasks.find { it.id == taskId }
         task?.let {
             it.isCompleted = true
-            emailService.sendEmail("Task '${it.title}' is completed.")
+            notificationService.sendNotification("Task '${it.title}' is completed.")
         }
     }
 
