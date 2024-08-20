@@ -7,6 +7,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+    private val taskManager = TaskManager()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -15,6 +17,20 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        taskManager.addTask(Task(1, "Buy groceries", false))
+        taskManager.addTask(Task(2, "Clean the house", false))
+
+        // Отметка задачи как выполненной
+        taskManager.completeTask(1)
+
+        // Удаление задачи
+        taskManager.deleteTask(2)
+
+        // Получение списка задач
+        val tasks = taskManager.getTasks()
+        tasks.forEach {
+            println("Task: ${it.title}, Completed: ${it.isCompleted}")
         }
     }
 }
